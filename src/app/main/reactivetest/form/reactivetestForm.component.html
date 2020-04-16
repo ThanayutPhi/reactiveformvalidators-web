@@ -38,26 +38,55 @@
         <mat-tab-group fxFlex>
           <mat-tab label="reactivetest">
             <form [formGroup]="reactivetestForm">
-              <div fxLayout="row" class="pl-20  pr-16" fxLayoutAlign="center">
-                <mat-form-field class="example-full-width" appearance="outline" fxFlex>
-                  <mat-label>เลขที่บัตรประจำตัวประชาชน</mat-label>
-                  <input matInput formControlName="citizenId" name="citizenId" placeholder="Enter your contact no">
-                  <mat-error
-                    *ngIf="reactivetestForm.get('citizenId').invalid && (reactivetestForm.get('citizenId').dirty || reactivetestForm.get('citizenId').touched)"
-                    class="alert alert-danger">
-                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.required">
-                      citizenId is required.
-                    </mat-error>
-                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.maxlength">
-                      citizenId cannot be more than 10 characters long.
-                    </mat-error>
-                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.minlength">
-                      citizenId must be at least 10 characters long.
-                    </mat-error>
-                  </mat-error>
-                </mat-form-field>
+              <div fxLayout="column" fxLayout.gt-xs="row wrap" fxFlex="100">
+
+                <div fxLayout="row wrap" fxFlex="100">
+                  <div fxLayoutAlign="center" fxFlex="100" fxFlex.gt-xs="50" class="pl-20 pr-16">
+                    <mat-form-field class="example-full-width" appearance="outline" fxFlex>
+                      <mat-label>เลขที่บัตรประจำตัวประชาชน</mat-label>
+                      <input matInput formControlName="citizenId" name="citizenId" placeholder="Enter your contact no">
+                      <mat-error
+                        *ngIf="reactivetestForm.get('citizenId').invalid && (reactivetestForm.get('citizenId').dirty || reactivetestForm.get('citizenId').touched)"
+                        class="alert alert-danger">
+                        <mat-error *ngIf="reactivetestForm.get('citizenId').errors.required">
+                          กรุณาใส่เลขที่บัตรประจำตัวประชาชน.
+                        </mat-error>
+                        <mat-error *ngIf="reactivetestForm.get('citizenId').errors.maxlength">
+                          กรุณาใส่เลขที่บัตรประจำตัวประชาชนให้ครบ 13 หลัก.
+                        </mat-error>
+                        <mat-error *ngIf="reactivetestForm.get('citizenId').errors.minlength">
+                          กรุณาใส่เลขที่บัตรประจำตัวประชาชนให้ครบ 13 หลัก.
+                        </mat-error>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayoutAlign="center" fxFlex="100" fxFlex.gt-xs="50" class="pl-20 pr-16">
+                    <mat-form-field class="example-full-width" appearance="outline" fxFlex>
+                      <mat-label>เบอร์โทรศัพท์</mat-label>
+                      <input matInput formControlName="phoneNumber" name="phoneNumber"
+                        placeholder="Enter your contact no">
+                      <mat-error
+                        *ngIf="reactivetestForm.get('phoneNumber').invalid && (reactivetestForm.get('phoneNumber').dirty || reactivetestForm.get('phoneNumber').touched)"
+                        class="alert alert-danger">
+                        <mat-error *ngIf="reactivetestForm.get('phoneNumber').errors.required">
+                          กรุณาใส่เบอร์โทรศัพท์.
+                        </mat-error>
+                        <mat-error *ngIf="reactivetestForm.get('phoneNumber').errors.maxlength">
+                          กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก.
+                        </mat-error>
+                        <mat-error *ngIf="reactivetestForm.get('phoneNumber').errors.minlength">
+                          กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 หลัก.
+                        </mat-error>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div fxLayoutAlign="center" fxFlex="100" fxFlex.gt-xs="37.5" class="pl-20 pr-16">
+                   
+                  </div> -->
+                </div>
+
+                {{reactivetestForm.value | json}}
               </div>
-              {{reactivetestForm.value | json}}
             </form>
           </mat-tab>
 

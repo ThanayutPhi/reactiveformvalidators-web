@@ -44,7 +44,8 @@ export class ReactivetestFormComponent implements OnInit {
     //     citizenId: ""
     //   };
     this.reactivetestData = {
-      citizenId: ""
+      citizenId: "",
+      phoneNumber: ""
     }
 
     this.reactivetestForm = this.createForm();
@@ -52,12 +53,17 @@ export class ReactivetestFormComponent implements OnInit {
   }
 
   createForm(): FormGroup {
-    let PERSONAL_CARDID_PATTERN = /^((\\+91-?)|0)?[0-9]{10}$/;
+    let PERSONAL_CARDID_PATTERN = /^[0-9]{13,13}$/;
+    let MOBILE_PATTERN = /^[0-9]{10,10}$/;
     return this.formBuilder.group({
       citizenId: [this.reactivetestData.citizenId,
+      [Validators.required, Validators.minLength(13),
+      Validators.maxLength(13),
+      Validators.pattern(PERSONAL_CARDID_PATTERN)]],
+      phoneNumber: [this.reactivetestData.phoneNumber,
       [Validators.required, Validators.minLength(10),
-        Validators.maxLength(10), 
-        Validators.pattern(PERSONAL_CARDID_PATTERN)]]
+      Validators.maxLength(10),
+      Validators.pattern(MOBILE_PATTERN)]]
     });
   }
 
@@ -68,14 +74,19 @@ export class ReactivetestFormComponent implements OnInit {
   get f() { return this.reactivetestForm.controls; }
   async onSave() {
     console.log(this.reactivetestForm.value);
-    this.submitted = true;
+    this.checkForm();
+    // this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.reactivetestForm.invalid) {
-      return;
-    }
+    // // stop here if form is invalid
+    // if (this.reactivetestForm.invalid) {
+    //   return;
+    // }
 
-    alert('SUCCESS!! :-)')
+    // alert('SUCCESS!! :-)')
+
+
+
+
     // this.spinner.show();
 
     // if (this.reactivetestData._id) {
@@ -101,5 +112,21 @@ export class ReactivetestFormComponent implements OnInit {
     // }
   }
 
+  checkID(id) {
+    let i = 0;
+    let sum = 0;
+    if (id.length != 13) return false;
+    for (i = 0, sum = 0; i < 12; i++)
+      sum += parseFloat(id.charAt(i)) * (13 - i); if ((11 - sum % 11) % 10 != parseFloat(id.charAt(12)))
+      return false; return true;
+  }
+
+  checkForm() {
+    if (!this.checkID(this.reactivetestForm.value.citizenId)) {
+      console.log("ผ่าน")
+      alert('รหัสประชาชนไม่ถูกต้อง');
+    }
+    else alert('รหัสประชาชนถูกต้อง เชิญผ่านได้');
+  }
 
 }
