@@ -1,0 +1,72 @@
+<div class="page-layout carded  fullwidth inner-scroll">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button class="mat-icon-button mr-0 mr-sm-16" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="logo-icon s-32 mr-16" [@animate]="{ value: '*', params: { delay: '50ms', scale: '0.2' } }">
+            edit
+          </mat-icon>
+          <span class="logo-text h1" [@animate]="{ value: '*', params: { delay: '100ms', x: '-25px' } }">
+            reactivetestForm
+          </span>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="40" class="pl-20  pr-16" fxLayoutAlign="end">
+          <button [disabled]="reactivetestForm.invalid" mat-fab color="warn" (click)="onSave()">
+            <mat-icon class="icon-position">save</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <!-- CONTENT -->
+      <div class="content">
+        <mat-tab-group fxFlex>
+          <mat-tab label="reactivetest">
+            <form [formGroup]="reactivetestForm">
+              <div fxLayout="row" class="pl-20  pr-16" fxLayoutAlign="center">
+                <mat-form-field class="example-full-width" appearance="outline" fxFlex>
+                  <mat-label>เลขที่บัตรประจำตัวประชาชน</mat-label>
+                  <input matInput formControlName="citizenId" name="citizenId" placeholder="Enter your contact no">
+                  <mat-error
+                    *ngIf="reactivetestForm.get('citizenId').invalid && (reactivetestForm.get('citizenId').dirty || reactivetestForm.get('citizenId').touched)"
+                    class="alert alert-danger">
+                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.required">
+                      citizenId is required.
+                    </mat-error>
+                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.maxlength">
+                      citizenId cannot be more than 10 characters long.
+                    </mat-error>
+                    <mat-error *ngIf="reactivetestForm.get('citizenId').errors.minlength">
+                      citizenId must be at least 10 characters long.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              {{reactivetestForm.value | json}}
+            </form>
+          </mat-tab>
+
+        </mat-tab-group>
+        <!--  -->
+      </div>
+      <!-- /CONTENT -->
+    </div>
+    <!-- /CONTENT CARD -->
+  </div>
+  <!-- /CENTER -->
+</div>
